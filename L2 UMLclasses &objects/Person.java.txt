@@ -1,0 +1,106 @@
+package edu.neu.csye6200;
+
+import java.util.Vector;
+
+public class Person {
+	private String firstName; // object instance data
+	private String lastName; // object instance data
+	private int age;
+
+	public Person() {
+		super();
+		this.age = 17;
+		this.firstName = "dan";
+		this.lastName = "peters";
+	}
+
+	public Person(String firstName, String lastName, int age) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+
+	public Person(String csvData) {
+		super();
+                String[] tokens = csvData.split(",");
+		this.firstName = tokens[0];
+		this.lastName = tokens[1];
+		this.age = stringToInt(tokens[2]);
+	}
+
+        private int stringToInt(String s) {
+            int n = 0;
+            
+            try {
+                n = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                System.out.println("Invalid integer '" + s + "' " + e.getMessage());
+            }
+            return n;
+        }
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+
+		return this.firstName + "  " + this.lastName + ", age " + this.age;
+//		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+	}
+
+	/**
+	 * method to demonstrate the use of this class.
+	 */
+	public static void demo() {
+		System.out.println("\n\t" + Person.class.getName() + ".demo()...");
+		Person dan = new Person();
+		System.out.println(dan);
+
+		// sequential container to contain multiple Person objects
+		Vector<Person> persons = new Vector<Person>();
+		persons.add(new Person("jai", "devmane", 18));
+
+		persons.add(new Person("jai1", "devmane", 18));
+		persons.add(new Person("jai2", "devmane", 18));
+		persons.add(new Person("jai3", "devmane", 18));
+		persons.add(new Person("jai4", "devmane", 18));
+		for (Person personObject : persons) {
+			System.out.println(personObject);
+		}
+		System.out.println(dan.toString());
+
+		System.out.println("\n\t" + Person.class.getName() + ".demo()... done!");
+	}
+	/**
+	 * CONSOLE OUTPUT: Driver executing main()...
+	 * 
+	 * edu.neu.csye6200.Person.demo()... dan peters, age 17 jai devmane, age 18 jai1
+	 * devmane, age 18 jai2 devmane, age 18 jai3 devmane, age 18 jai4 devmane, age
+	 * 18 dan peters, age 17
+	 * 
+	 * edu.neu.csye6200.Person.demo()... done! Driver executing main()... done!
+	 */
+}

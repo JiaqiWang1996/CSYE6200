@@ -1,0 +1,146 @@
+package edu.neu.csye6200;
+
+public class DemoClass {
+	/**
+	 * class state
+	 * 
+	 * Class state is common to all object instances)
+	 * As all object instances share the 
+	 * this same memory allocation
+	 */
+	public static final int K_CLASS_VERSION = 1;
+	public static final String K_AUTHOR = "dgp";
+	private static int aStaticClassNumber;
+	/**
+	 * Object instance state
+	 * 
+	 * each object instance has it's own
+	 * memory allocation for it's own state.
+	 */
+	private int anObjectInstanceNumber;
+	private String anObjectInstanceString;
+
+	/**
+	 * Static Initialization Block
+	 * provides a common initialization
+	 * for all constructors.
+	 * 
+	 * This block of code is executed
+	 * only once when the class is initialized
+	 */
+	static {
+		DemoClass.aStaticClassNumber = 101;		
+	}
+
+	/**
+	 * Instance Initialization Block
+	 * provides a common initialization
+	 * for all constructors.
+	 * 
+	 * This block of code is executed
+	 * each time an object instance is created
+	 */
+	{
+		this.anObjectInstanceNumber = 201;
+		this.anObjectInstanceString = "dan";
+	}
+	
+	/**
+	 * Default class constructor
+	 * initialize class state 
+	 * (i.e. attributes, data, fields) 
+	 * to default values.
+	 */
+	public DemoClass() {
+		super();
+	}
+	
+	/**
+	 * Default class constructor
+	 * initialize class state 
+	 * (i.e. attributes, data, fields) 
+	 * to supplied values.
+	 */
+	public DemoClass(int anObjectInstanceNumber, String anObjectInstanceString) {
+		super();
+		this.anObjectInstanceNumber = anObjectInstanceNumber;
+		this.anObjectInstanceString = anObjectInstanceString;
+	}
+
+	/**
+	 * API
+	 * These public methods comprise the API,
+	 * i.e. the only way this class (and its objects)
+	 * are designed to be used by other classes.
+	 */
+	
+	public static int getaStaticClassNumber() {
+		return aStaticClassNumber;
+	}
+
+	public static void setaStaticClassNumber(int aStaticClassNumber) {
+		DemoClass.aStaticClassNumber = aStaticClassNumber;
+	}
+
+	public int getAnObjectInstanceNumber() {
+		return anObjectInstanceNumber;
+	}
+
+	public void setAnObjectInstanceNumber(int anObjectInstanceNumber) {
+		this.anObjectInstanceNumber = anObjectInstanceNumber;
+	}
+	
+	public String getAnObjectInstanceString() {
+		return anObjectInstanceString;
+	}
+
+	public void setAnObjectInstanceString(String anObjectInstanceString) {
+		this.anObjectInstanceString = anObjectInstanceString;
+	}
+
+	/**
+	 * Return the state of this object
+	 * represented as a String
+	 */
+	@Override
+	public String toString() {
+		return "DemoClass v" + DemoClass.K_CLASS_VERSION 
+				+ " [aStaticClassNumber=" + aStaticClassNumber + "]"
+				+ " [anObjectInstanceNumber=" + anObjectInstanceNumber + "]"
+				+ " [anObjectInstanceString=" + anObjectInstanceString + "]";
+	}
+
+	/**
+	 * Demonstrate the use of this class
+	 * with examples.
+	 */
+	public static void demo() {
+		System.out.println("DemoClass.demo()...");
+		
+		// create an object initialized to a default state
+		DemoClass defaultObjectState = new DemoClass();
+		System.out.println("\n Show Default Object State:");
+		System.out.println(defaultObjectState); // output state
+		
+		/**
+		 * create a number of objects, each initialized to a unique specific state
+		 */
+		System.out.println("\n Show Objects set to a specific State:");
+		for (int i = 0; i < 10; i++) {
+			// create an object initialized to a default state
+			DemoClass.setaStaticClassNumber(102 + i);
+			System.out.println(new DemoClass(202 + i, "object" + (202 + i))); // output state
+		}
+		
+		// create an object initialized to a unique specific state
+		DemoClass object = new DemoClass(707, "object" + 707);
+		DemoClass.setaStaticClassNumber(7);	// set common class state
+		System.out.println(object); 	// output state
+		
+		System.out.println("\n Show Default Object State:");
+		System.out.println(defaultObjectState); // output state
+
+		System.out.println("DemoClass.demo()... done!");
+	}
+
+}

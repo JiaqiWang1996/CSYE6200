@@ -1,0 +1,8 @@
+4方式证明inheritance
+ abstract class
+ object
+concrete class  instance
+interface    implement
+
+
+polymorphism3种形式 API concreat class abstract class

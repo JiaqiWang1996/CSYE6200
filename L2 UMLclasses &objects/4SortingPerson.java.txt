@@ -1,0 +1,125 @@
+package edu.neu.csye6200;
+
+import java.util.Comparator;
+import java.util.Vector;
+
+public class SortingPerson implements Comparable<SortingPerson>{
+	private String firstName; // object instance data
+	private String lastName; // object instance data
+	private int age;
+
+
+	/**
+	 * Implementation for Comparable interface
+	 * to provide a default Natural Order for this class
+	 * (i.e. to sort without providing a explicit Comparator to sort) 
+	 * @param o
+	 * @return
+	 */
+	@Override
+	public int compareTo(SortingPerson o) {
+		return this.getLastName().compareToIgnoreCase(o.getLastName());
+	}
+
+	public SortingPerson() {
+		super();
+		this.age = 17;
+		this.firstName = "dan";
+		this.lastName = "peters";
+	}
+
+	public SortingPerson(String firstName, String lastName, int age) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+
+		return this.firstName + "  " + this.lastName + ", age " + this.age;
+//		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+	}
+
+	/**
+	 * method to demonstrate the use of this class.
+	 */
+	public static void demo() {
+		System.out.println("\n\t" + SortingPerson.class.getName() + ".demo()...");
+		SortingPerson dan = new SortingPerson();
+		System.out.println(dan);
+
+		// sequential container to contain multiple Person objects
+		
+		Vector<SortingPerson> persons = new Vector<SortingPerson>();
+		persons.add(new SortingPerson("jai", "devmane", 22));
+
+		persons.add(new SortingPerson("david", "wang", 18));
+		persons.add(new SortingPerson("dan", "peters", 17));
+		persons.add(new SortingPerson("jackie", "wang", 16));
+		persons.add(new SortingPerson("henry", "li", 19));
+		for (SortingPerson personObject : persons) {
+			System.out.println(personObject);
+		}
+		System.out.println(dan.toString());
+		
+		
+		/**
+		 * Sorting Objects
+		 */
+		System.out.println("\n\t" + "Sort persons by default order (LAST NAME):");
+		persons.sort(null);		// use defaultl order
+		persons.forEach(System.out::println);
+		
+		System.out.println("\n\t" + "Sort persons by LAST NAME:");
+		persons.sort(Comparator.comparing(SortingPerson::getLastName));
+		persons.forEach(System.out::println);
+		
+		System.out.println("\n\t" + "Sort persons by FIRST NAME:");
+		persons.sort(Comparator.comparing(SortingPerson::getFirstName));
+		persons.forEach(System.out::println);
+		
+		System.out.println("\n\t" + "Sort persons by youngest:");
+		persons.sort(Comparator.comparing(SortingPerson::getAge));
+		persons.forEach(System.out::println);
+		System.out.println("\n\t" + "Sort persons by eldest:");
+		persons.sort(Comparator.comparing(SortingPerson::getAge).reversed());
+		persons.forEach(System.out::println);
+
+		System.out.println("\n\t" + SortingPerson.class.getName() + ".demo()... done!");
+	}
+	/**
+	 * CONSOLE OUTPUT: Driver executing main()...
+	 * 
+	 * edu.neu.csye6200.Person.demo()... dan peters, age 17 jai devmane, age 18 jai1
+	 * devmane, age 18 jai2 devmane, age 18 jai3 devmane, age 18 jai4 devmane, age
+	 * 18 dan peters, age 17
+	 * 
+	 * edu.neu.csye6200.Person.demo()... done! Driver executing main()... done!
+	 */
+}

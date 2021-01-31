@@ -1,0 +1,45 @@
+package edu.neu.csye6200;
+
+import java.util.Vector;
+
+public class Person {
+	private int age;
+	private String name;
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Person(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+	public Person() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public static void demo() {
+		Vector<Person> personsList = new Vector<Person>();
+		personsList.add(new Person(17, "dan"));
+		personsList.add(new Person(16, "zheng"));
+		personsList.add(new Person(18, "david"));
+		personsList.add(new Person(19, "max"));
+		
+		for (Person obj : personsList) {
+			System.out.println(obj.getName() + " is age " + obj.getAge());
+		}
+		
+		for (Person person : personsList) {
+			System.out.println();
+		}
+	}
+
+}
